@@ -1,0 +1,83 @@
+<template name="running">
+    <div class="modal hide fade in" id="createRouteModal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>Create a Route</h3>
+        </div>
+        <div class="modal-body">
+            <fieldset>
+                <div class="component">
+                    <div class="control-group">
+                        <label class="control-label" for="routename">Name</label>
+                        <div class="controls">
+                            <input id="routename" name="routename" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="component">
+                    <div class="control-group">
+                        <label class="control-label" for="routedistance">Distance</label>
+                        <div class="controls">
+                            <input id="routedistance" name="routedistance" type="text">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <a href="#" class="btn btn-primary saveNewRoute">Save</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="well">
+            <div class="row">
+                <div class="span12"><h3>Log a Run</h3></div>
+            </div>
+            <div class="row">
+                <!--<div class="span3">-->
+                    <!--<div class="btn-group">-->
+                        <!--<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">-->
+                            <!--Route-->
+                            <!--<span class="caret"></span>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu">-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="span3">
+                    <select id="routepicker">
+                        {{#each routes}}
+                            <option value={{_id}}>{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="span2">
+                    <div class="controls">
+                        <div class="input-append">
+                            <input id="duration" class="span2" type="text" placeholder="HH:mm:ss or mm:ss">
+                            <span class="add-on"><i class="icon-time"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div id="datetimepicker" class="input-append">
+                        <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text">
+                        <span class="add-on">
+                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                          </i>
+                        </span>
+                    </div>
+                </div>
+                <div class="span2"><button class="btn logRun">Log!</button></div>
+            </div>
+        </div>
+        <div class="row">
+            {{> routeMap}}
+            {{> routeGrid}}
+        </div>
+        {{> runGrid}}
+    </div>
+    {{invokeAfterLoad}}
+</template>

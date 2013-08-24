@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "router": {},
+    "HTML5-History-API": {},
+    "moment": {},
+    "collection-api": {},
+    "bootstrap-less": {}
+  }
+}

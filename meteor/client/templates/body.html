@@ -1,0 +1,41 @@
+<template name="body">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="z-index: 100;">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="/">Falcon</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="/">About</a></li>
+                        <li><a href="/running">Running</a></li>
+                        <li><a href="/location">Location</a></li>
+                    </ul>
+                    <div class="pull-right">
+                        {{loginButtons align="right"}}
+                    </div>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="height:42px; width:100%"></div>
+        {{#if pageName}}
+            {{renderPage}}
+        {{else}}
+            {{> about}}
+        {{/if}}
+    </div>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="span12 text-center">
+                <small>credits</small>
+            </div>
+        </div>
+    </div>
+</template>

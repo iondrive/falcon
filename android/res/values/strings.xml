@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">falcon</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="welcome">Falcon - The better way to run</string>
+    <string name="curvy">Curvy (max battery drain)</string>
+    <string name="somewhatcurvy">Straight as a Rainbow</string>
+    <string name="straight">Straight as an Arrow</string>
+    <string name="log">Finish and Log</string>
+    <string name="toggleTextOff">Start</string>
+    <string name="toggleTextOn">Stop</string>
+
+</resources>
