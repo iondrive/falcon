@@ -60,8 +60,9 @@ Meteor.methods({
 // FIXTURE DATA
 if (Meteor.isServer && Routes.find().count() == 0) {
     var routes = [
-        {name: "Four and a Bore", distance: 4.25},
-        {name: "High Five", distance: 5}
+        {name: "Four and a Bore", distance: 4.25, timestamp: 10, active: true},
+        {name: "High Five", distance: 5, timestamp: 10, active: true},
+        {name: "Two bad", distance: 2, timestamp: 11, active: false}
     ];
 
     _.each(routes, function(route) {
