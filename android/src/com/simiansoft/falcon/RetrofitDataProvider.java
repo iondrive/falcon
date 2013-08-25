@@ -6,90 +6,57 @@ import retrofit.RestAdapter;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
-import android.os.AsyncTask;
+import retrofit.http.Path;
 
-public class RetrofitDataProvider implements IDataProvider{
+public class RetrofitDataProvider implements INetworkCommunicationProvider{
 	private static String REST_URL = "http://68.173.39.116:3000";
 	
-	interface RouteApi {
-		@POST("/collectionapi/routes")
-		Route postRoute(@Body Route route);
+	interface FalconApi {
+		@GET("/api/routes?timestamp={timestamp}")
+		List<SimpleRoute> getRouteMetadata(@Path("timestamp") long timestamp);
 		
-		@GET("/collectionapi/routes")
-		List<Route> getRoutes();
+		@GET("/api/routes/{id}")
+		Route getRoute(@Path("id") String id);
 		
-		@POST("/collectionapi/runs")
-		Route postRun(@Body String JSON);
-	}
-
-	@Override
-	public void createRoute(Route route) {
-		new CreateRouteDataTask().execute(route);
+		@POST("/api/runs")
+		void postRun(@Body String JSON);
 	}
 	
-	private class CreateRouteDataTask extends AsyncTask<Route, Void, Void> {
-		protected Void doInBackground(Route... routes) {
-			// just do the first one
-			createRouteHelper(routes[0]);
-			return null;
-		}
-	}
+	RestAdapter _restAdapter;
+	private FalconApi _api;
 	
-	private void createRouteHelper(Route route) {
-		// TODO Auto-generated method stub
-		RestAdapter restAdapter = new RestAdapter.Builder().setServer(REST_URL).build();
-		
-		RouteApi api = restAdapter.create(RouteApi.class);
-		Route r = api.postRoute(route);
+	public RetrofitDataProvider() {
+		_restAdapter = new RestAdapter.Builder().setServer(REST_URL).build();
+		_api = _restAdapter.create(FalconApi.class);
 	}
-
-	
 	
 	@Override
-	public List<Route> GetRoutes() {
-		new GetRoutesDataTask().execute();
-		return null;
+	public List<SimpleRoute> getRouteMetadata(long timestamp) {
+		return _api.getRouteMetadata(timestamp);
 	}
 	
-	private class GetRoutesDataTask extends AsyncTask<Void, Void, List<Route>> {
-		protected List<Route> doInBackground(Void... p) {
-			// just do the first one
-			getRoutesHelper();
-			return null;
-		}
-	}
-	
-	private void getRoutesHelper() {
-		// TODO Auto-generated method stub
-		RestAdapter restAdapter = new RestAdapter.Builder().setServer(REST_URL).build();
-		
-		RouteApi api = restAdapter.create(RouteApi.class);
-		List<Route> routes = api.getRoutes();
-	}
-	
+//	private class GetRoutesDataTask extends AsyncTask<long, Void, List<SimpleRoute>> {
+//		protected List<SimpleRoute> doInBackground(long... p) {
+//			getRoutesHelper();
+//			return null;
+//		}
+//	}
+//	
+//	private void getRoutesHelper() {
+//		RestAdapter restAdapter = new RestAdapter.Builder().setServer(REST_URL).build();
+//		
+//		FalconeApi api = restAdapter.create(FalconeApi.class);
+//		List<Route> routes = _api.getRouteMetadata()
+//	}
 	
 
 	@Override
-	public void logRun(Route route) {
-		// TODO Auto-generated method stub
-		new LogRunDataTask().execute(route);
-	}
-	
-	private class LogRunDataTask extends AsyncTask<Route, Void, Void> {
-		protected Void doInBackground(Route... routes) {
-			// just do the first one
-			logRunHelper(routes[0]);
-			return null;
-		}
-	}
-	
-	private void logRunHelper(Route route) {
-		// TODO Auto-generated method stub
-		RestAdapter restAdapter = new RestAdapter.Builder().setServer(REST_URL).build();
-		
-		RouteApi api = restAdapter.create(RouteApi.class);
-		Route r = api.postRun(route.toString());
+	public Route getRoute(String id) {
+		return _api.getRoute(id);
 	}
 
-
+	@Override
+	public void postRun(Run run) {
+		_api.postRun(run.toString());
+	}
 }

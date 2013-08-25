@@ -11,21 +11,26 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
-	private IDataProvider data;
+	private INetworkCommunicationProvider net;
+	private ILocalStorageProvider data;
 	private Route route;
+	private Run run;
 	private final String TAG = "Falcon";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        data = new RetrofitDataProvider();
+        net = new RetrofitDataProvider();
+        data = new SQLiteLocalStorageManager(this);
         route = new Route();
+        run = new Run();
         LocationManager locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
         	public void onLocationChanged(Location location) {
         		// log the point
-        		route.AddPoint(location.getLongitude(), location.getLatitude(), location.getTime());
+        		run.AddPoint(location.getLongitude(), location.getLatitude(), location.getTime());
             	Log.d(TAG, route.toString());
         	}
         	
@@ -48,8 +53,10 @@ public class MainActivity extends Activity {
     }
     
     public void onLogRun(View v) {
+    	// TODO: handle logic surrounding creating new runs and changing UI elements to reflect like 'START NEW' or something
     	if (v.getId() == R.id.button4) {
-    		data.createRoute(route);
+    		net.postRun(run);
+    		run = new Run();
     	}
     }
 
