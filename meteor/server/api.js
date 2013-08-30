@@ -82,6 +82,7 @@ Meteor.Router.add('/api/routes', 'POST', function(doc) {
  * Adds a new route.  Always returns success.
  */
 Meteor.Router.add('/api/runs', 'POST', function(doc) {
+    debugger;
     var res = {};
     var doc = this.request.body;
 
