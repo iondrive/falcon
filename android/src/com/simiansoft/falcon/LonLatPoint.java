@@ -1,19 +1,38 @@
 package com.simiansoft.falcon;
 
+/**
+ * @author peter
+ *
+ */
 public class LonLatPoint {
-	public double Longitude;
-	public double Latitude;
+	/**
+	 * Longitude
+	 */
+	private double x;
+	
+	/**
+	 * Latitude
+	 */
+	private double y;
 	
 	public LonLatPoint(double lon, double lat)
 	{
-		this.Longitude = lon;
-		this.Latitude = lat;
+		this.x = lon;
+		this.y = lat;
+	}
+	
+	public double getLatitude() {
+		return y;
+	}
+	
+	public double getLongitude() {
+		return x;
 	}
 	
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("{a:").append(Longitude).append(",b:").append(Latitude).append("}");
+		sb.append("{\"a\":").append(x).append(",\"b\":").append(y).append("}");
 		return sb.toString();
 	}
 }

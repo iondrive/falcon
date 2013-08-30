@@ -59,8 +59,8 @@ public class SQLiteLocalStorageManager extends SQLiteOpenHelper implements
 		insert.put("_id",  route.Id);
 		insert.put("name",  route.Name);
 		insert.put("distance", route.Distance);
-		insert.put("startingLon",  route.StartingPoint.Longitude);
-		insert.put("startingLat", route.StartingPoint.Latitude);
+		insert.put("startingLon",  route.StartingPoint.getLongitude());
+		insert.put("startingLat", route.StartingPoint.getLatitude());
 		insert.put("timestamp", route.Timestamp);
 		this.getWritableDatabase().insert("routes", null, insert);
 	}
