@@ -99,3 +99,12 @@ Meteor.Router.add('/api/runs', 'POST', function(doc) {
         return ['500', 'invalid post document'];
     }
 });
+
+/**
+ * GET /api/runs.js
+ */
+Meteor.Router.add('/api/runs.js', 'GET', function() {
+    return JSON.stringify(Runs.find().map(function(doc) {
+        return {data: doc.Data};
+    }));
+})

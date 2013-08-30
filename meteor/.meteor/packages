@@ -10,7 +10,6 @@ bootstrap
 accounts-password
 accounts-ui
 standard-app-packages
-collection-api
 HTML5-History-API
 moment
 router

@@ -1,34 +1,49 @@
 Template.routeMap.invokeAfterLoad = function() {
     var init = function() {
         map = new OpenLayers.Map('map');
-        var osm = new OpenLayers.Layer.OSM();
+        var osm = new OpenLayers.Layer.OSM('Simple OSM Map', null, {
+            eventListeners: {
+                tileloaded: function(evt) {
+                    var ctx = evt.tile.getCanvasContext();
+                    if (ctx) {
+                        var imgd = ctx.getImageData(0, 0, evt.tile.size.w, evt.tile.size.h);
+                        var pix = imgd.data;
+                        for (var i = 0, n = pix.length; i < n; i += 4) {
+                            pix[i] = pix[i + 1] = pix[i + 2] = (3 * pix[i] + 4 * pix[i + 1] + pix[i + 2]) / 8;
+                        }
+                        ctx.putImageData(imgd, 0, 0);
+                        evt.tile.imgDiv.removeAttribute("crossorigin");
+                        evt.tile.imgDiv.src = ctx.canvas.toDataURL();
+                    }
+                }
+            }
+        });
         var fromProjection = new OpenLayers.Projection("EPSG:4326");
         var toProjection = new OpenLayers.Projection("EPSG:900913");
         var startingPosition = new OpenLayers.LonLat(-74.00918139, 40.70371369).transform(fromProjection, toProjection);
 
-        var path = new OpenLayers.Layer.Vector("Line Layer");
-        var rawPoints = [
-                {"x": -74.00918139, "y": 40.70371369},
-            {"x": -74.00928139, "y": 40.70381369},
-            {"x": -74.00958139, "y": 40.70391369}
-        ];
-
-        var points = [];
-        rawPoints.forEach(function(p) {
-            points.push(new OpenLayers.Geometry.Point(p.x, p.y).transform(fromProjection, toProjection));
-        });
-        var line = new OpenLayers.Geometry.LineString(points);
+        path = new OpenLayers.Layer.Vector("Line Layer");
 
         var style = {
-            strokeColor: '#0000ff',
+            strokeColor: '#fdaa44',
             strokeOpacity: 0.5,
             strokeWidth: 5
         };
 
-        var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
-        path.addFeatures([lineFeature]);
+        if (Session.get("activeRoute")) {
+            // draw the active route
+        }
 
+        if (Session.get("activeRun")) {
+            // draw the active run
+        }
 
+        var run = Runs.findOne({});
+        var activeRunLine = new OpenLayers.Geometry.LineString(_.map(run.Data, function(point) {
+            return new OpenLayers.Geometry.Point(point.x, point.y).transform(fromProjection, toProjection);
+        }));
+        var activeRunFeature = new OpenLayers.Feature.Vector(activeRunLine, null, style);
+        path.addFeatures([activeRunFeature]);
 
         map.addLayer(osm);
         map.addLayer(path);
@@ -43,6 +58,5 @@ Template.routeMap.invokeAfterLoad = function() {
             init();
         }
     }
-
 };
 

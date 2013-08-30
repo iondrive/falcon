@@ -50,6 +50,7 @@
         android:layout_above="@+id/textView1"
         android:layout_alignLeft="@+id/textView1"
         android:textOff="@string/toggleTextOff"
-        android:textOn="@string/toggleTextOn" />
+        android:textOn="@string/toggleTextOn" 
+        android:onClick="onToggleClicked" />
 
 </RelativeLayout>
