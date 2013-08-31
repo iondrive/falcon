@@ -6,7 +6,7 @@ public class RouteMatchAlgorithm {
 		route.Id = "TEST";
 		route.Name = "TEST ROUTE";
 		route.Distance = 13.1;
-		route.StartingPoint = new LonLatPoint(12, 13);
+		route.StartingPoint = new LonLatPoint(12, 13, 0);
 		
 		return route;
 	}

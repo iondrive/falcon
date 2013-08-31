@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
         			startButton.setEnabled(true);
         		}
         		if (status != LoggingStatus.Stopped) {
-	        		run.AddPoint(location.getLongitude(), location.getLatitude(), location.getTime(), status);
+	        		run.AddPoint(location.getLongitude(), location.getLatitude(), location.getAltitude(), location.getTime(), status);
 	            	Log.d(TAG, run.Data.get(run.Data.size() -1).toString());
         		}
         	}
@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
     		logButton.setEnabled(true);
     	}
 		Location last = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		run.AddPoint(last.getLongitude(), last.getLatitude(), new Date().getTime(), clickStatus);
+		run.AddPoint(last.getLongitude(), last.getLatitude(), last.getAltitude(), new Date().getTime(), clickStatus);
 		run.Route = RouteMatchAlgorithm.MatchRoute(run);
     }
 

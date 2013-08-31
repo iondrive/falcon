@@ -5,6 +5,8 @@ import java.util.List;
 import retrofit.RestAdapter;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import android.os.AsyncTask;
@@ -14,12 +16,15 @@ public class RetrofitDataProvider implements INetworkCommunicationProvider{
 	
 	interface FalconApi {
 		@GET("/api/routes?timestamp={timestamp}")
+		@Headers("usertoken: peter.m.brandt@gmail.com")
 		List<SimpleRoute> getRouteMetadata(@Path("timestamp") long timestamp);
 		
 		@GET("/api/routes/{id}")
+		@Headers("usertoken: peter.m.brandt@gmail.com")
 		Route getRoute(@Path("id") String id);
 		
 		@POST("/api/runs")
+		@Headers("usertoken: peter.m.brandt@gmail.com")
 		String postRun(@Body Run run);
 	}
 	

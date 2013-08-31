@@ -12,8 +12,8 @@ public class Run {
 		Data = new ArrayList<LogPoint>();
 	}
 	
-	public void AddPoint(double lon, double lat, long timestamp, LoggingStatus status) {
-		Data.add(new LogPoint(lon, lat, timestamp, status));
+	public void AddPoint(double lon, double lat, double alt, long timestamp, LoggingStatus status) {
+		Data.add(new LogPoint(lon, lat, alt, timestamp, status));
 	}
 	
 	public String toJSON() {

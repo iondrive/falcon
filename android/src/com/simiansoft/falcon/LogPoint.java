@@ -30,12 +30,13 @@ public class LogPoint extends LonLatPoint {
 	 * 
 	 * @param lon Longitude
 	 * @param lat Latitude
+	 * @param alt Altitude
 	 * @param date Number of milliseconds since Jan 1 1970, ex new Date().getTime()
 	 * @param status active, paused, clickedStart etc
 	 */
-	public LogPoint(double lon, double lat, long date, LoggingStatus status)
+	public LogPoint(double lon, double lat, double alt, long date, LoggingStatus status)
 	{
-		super(lon, lat);
+		super(lon, lat, alt);
 		this.d = date;
 		this.s = status.toInt();
 	}
@@ -46,10 +47,12 @@ public class LogPoint extends LonLatPoint {
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("{\"a\":")
+		sb.append("{\"x\":")
 		.append(getLongitude())
-		.append(",\"b\":")
+		.append(",\"y\":")
 		.append(getLatitude())
+		.append(",\"a\":")
+		.append(getAltitude())
 		.append(",\"t\":")
 		.append(d)
 		.append(",\"s\":")

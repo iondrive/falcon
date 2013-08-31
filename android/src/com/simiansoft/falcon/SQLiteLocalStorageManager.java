@@ -30,7 +30,7 @@ public class SQLiteLocalStorageManager extends SQLiteOpenHelper implements
 		String sql = "select _id, name, distance, startingLon, startingLat, timestamp from routes";
 		Cursor cursor = this.getWritableDatabase().rawQuery(sql,  null);
 		while (cursor.moveToNext()) {
-			LonLatPoint startingPoint = new LonLatPoint(cursor.getDouble(3), cursor.getDouble(4));
+			LonLatPoint startingPoint = new LonLatPoint(cursor.getDouble(3), cursor.getDouble(4), 0);
 			SimpleRoute route = new SimpleRoute();
 			route.Id = cursor.getString(0);
 			route.Name = cursor.getString(1);

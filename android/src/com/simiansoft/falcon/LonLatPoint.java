@@ -15,10 +15,16 @@ public class LonLatPoint {
 	 */
 	private double y;
 	
-	public LonLatPoint(double lon, double lat)
+	/**
+	 * Altitude
+	 */
+	private double a;
+	
+	public LonLatPoint(double lon, double lat, double alt)
 	{
 		this.x = lon;
 		this.y = lat;
+		this.a = alt;
 	}
 	
 	public double getLatitude() {
@@ -29,10 +35,14 @@ public class LonLatPoint {
 		return x;
 	}
 	
+	public double getAltitude() {
+		return a;
+	}
+	
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("{\"a\":").append(x).append(",\"b\":").append(y).append("}");
+		sb.append("{\"x\":").append(x).append(",\"y\":").append(y).append("}");
 		return sb.toString();
 	}
 }
