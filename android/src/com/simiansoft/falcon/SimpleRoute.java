@@ -1,11 +1,13 @@
 package com.simiansoft.falcon;
 
 /**
+ * Make sure to modify /meteor/server/api.js when you modify the properties here
  * @author peter
  *
  */
 public class SimpleRoute {
 	public String Id;
+	public int AndroidId;
 	public String Name;
 	public LonLatPoint StartingPoint;
 	public double Distance;

@@ -39,8 +39,9 @@
         android:layout_alignLeft="@+id/seekBar1"
         android:layout_toLeftOf="@+id/button4"
         android:gravity="center"
-        android:text=".       .      .     .    .   .  . ..."
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="Power savings"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        />
 
     <ToggleButton
         android:id="@+id/toggleButton1"

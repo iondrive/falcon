@@ -9,23 +9,21 @@ import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
-import android.os.AsyncTask;
+import retrofit.http.Query;
 
 public class RetrofitDataProvider implements INetworkCommunicationProvider{
 	private static String REST_URL = "http://68.173.39.116:3000";
+	private String _usertoken;
 	
 	interface FalconApi {
-		@GET("/api/routes?timestamp={timestamp}")
-		@Headers("usertoken: peter.m.brandt@gmail.com")
-		List<SimpleRoute> getRouteMetadata(@Path("timestamp") long timestamp);
+		@GET("/api/routes")
+		List<Route> getRoutes(@Query("timestamp") long timestamp, @Header("usertoken") String usertoken);
 		
 		@GET("/api/routes/{id}")
-		@Headers("usertoken: peter.m.brandt@gmail.com")
-		Route getRoute(@Path("id") String id);
+		Route getRoute(@Path("id") String id, @Header("usertoken") String usertoken);
 		
 		@POST("/api/runs")
-		@Headers("usertoken: peter.m.brandt@gmail.com")
-		String postRun(@Body Run run);
+		String postRun(@Body Run run, @Header("usertoken") String usertoken);
 	}
 	
 	RestAdapter _restAdapter;
@@ -34,21 +32,16 @@ public class RetrofitDataProvider implements INetworkCommunicationProvider{
 	public RetrofitDataProvider() {
 		_restAdapter = new RestAdapter.Builder().setServer(REST_URL).build();
 		_api = _restAdapter.create(FalconApi.class);
+		_usertoken = "peter.m.brandt@gmail.com";
 	}
 	
 	@Override
-	public List<SimpleRoute> getRouteMetadata(long timestamp) {
-		return _api.getRouteMetadata(timestamp);
-	}
-
-	@Override
-	public Route getRoute(String id) {
-		return _api.getRoute(id);
+	public List<Route> getRoutes(long timestamp) {
+		return _api.getRoutes(timestamp, _usertoken);
 	}
 
 	@Override
 	public void postRun(Run run) {
-		
-		String res = _api.postRun(run);
+		_api.postRun(run, _usertoken);
 	}
 }

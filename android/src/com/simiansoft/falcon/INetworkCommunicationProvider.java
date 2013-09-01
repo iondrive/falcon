@@ -3,7 +3,6 @@ package com.simiansoft.falcon;
 import java.util.List;
 
 public interface INetworkCommunicationProvider {
-	List<SimpleRoute> getRouteMetadata(long timestamp);
-	Route getRoute(String id);
+	List<Route> getRoutes(long timestamp);
 	void postRun(Run run);
 }

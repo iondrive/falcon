@@ -31,8 +31,16 @@ public class LonLatPoint {
 		return y;
 	}
 	
+	public double getLatitudeRad() {
+		return Math.toRadians(y);
+	}
+	
 	public double getLongitude() {
 		return x;
+	}
+	
+	public double getLongitudeRad() {
+		return Math.toRadians(x);
 	}
 	
 	public double getAltitude() {

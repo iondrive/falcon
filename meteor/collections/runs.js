@@ -7,7 +7,11 @@ _.extend(RunExtensions.prototype, {
         return Routes.findOne({"_id": this.routeId, userId: Meteor.userId()});
     },
     paceSec: function() {
-        return this.durationSec/this.route().distance;
+        if (this.route()) {
+            return this.durationSec/this.route().distance;
+        } else {
+            return 0;
+        }
     },
     pace: function() {
         return Utils.secondsToHrMinSec(this.paceSec());
