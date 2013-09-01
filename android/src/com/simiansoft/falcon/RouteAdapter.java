@@ -27,7 +27,7 @@ public class RouteAdapter extends ArrayAdapter{
 			LayoutInflater inflater = ((Activity)_mainContext).getLayoutInflater();
 			row = inflater.inflate(R.layout.route_item, parent, false);
 			((TextView)row.findViewById(R.id.textView1)).setText(_routes.get(position).Name);
-			((TextView)row.findViewById(R.id.textView2)).setText(String.format(" [%f.2] miles", _routes.get(position).Distance));
+			((TextView)row.findViewById(R.id.timeElapsedText)).setText(String.format(" [%f.2] miles", _routes.get(position).Distance));
 		}
 		return row;
 	}
@@ -38,7 +38,7 @@ public class RouteAdapter extends ArrayAdapter{
 			LayoutInflater inflater = ((Activity)_mainContext).getLayoutInflater();
 			row = inflater.inflate(R.layout.route_item, parent, false);
 			((TextView)row.findViewById(R.id.textView1)).setText(_routes.get(position).Name);
-			((TextView)row.findViewById(R.id.textView2)).setText(String.format(" [%f.2] miles", _routes.get(position).Distance));
+			((TextView)row.findViewById(R.id.timeElapsedText)).setText(String.format(" [%f.2] miles", _routes.get(position).Distance));
 		}
 		return row;
 	}

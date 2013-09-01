@@ -11,5 +11,11 @@
     <string name="log">Finish and Log</string>
     <string name="toggleTextOff">Start</string>
     <string name="toggleTextOn">Stop</string>
+    <string name="time">Time:&#160;</string>
+    <string name="pace">Pace:&#160;</string>
+    <string name="distance">Distance:&#160;</string>
+    <string name="miles_abbr">&#160;mi</string>
+    <string name="min_abbr">&#160;min</string>
+    <string name="miles_min_abbr">&#160;min/mi</string>
 
 </resources>
